@@ -1136,7 +1136,7 @@ class PlayState extends MusicBeatState
 		if (!loadRep)
 			rep = new Replay("na");
 
-		if (curStage == 'night') {
+		/*if (curStage == 'night') {
 			phillyCityLights = new FlxTypedGroup<FlxSprite>();
 			add(phillyCityLights);
 
@@ -1170,9 +1170,9 @@ class PlayState extends MusicBeatState
 				glow2.antialiasing = true;
 				coolGlowyLightsMirror.add(glow2);
 			}
-		}
+		}*/
 		super.create();
-		areYouReady = new FlxTypedGroup<FlxSprite>();
+		/*areYouReady = new FlxTypedGroup<FlxSprite>();
 		add(areYouReady);
 		for (i in 0...3) {
 			var shit:FlxSprite = new FlxSprite();
@@ -1190,7 +1190,7 @@ class PlayState extends MusicBeatState
 		} 
 
 		trace(dad.x);
-		trace(dad.y);
+		trace(dad.y);*/
 	}
 
 	function schoolIntro(?dialogueBox:DialogueBox):Void
@@ -3496,14 +3496,14 @@ class PlayState extends MusicBeatState
 			luaModchart.executeState('stepHit',[curStep]);
 		}
 
-		/*if (storyDifficulty != 3 && !FlxG.save.data.lowDetail) {
+		if (storyDifficulty != 3 && !FlxG.save.data.lowDetail) {
 			if (curSong.toLowerCase() == 'split' && curStep == 124 && camZooming || curSong.toLowerCase() == 'split' && curStep == 126 && camZooming || curSong.toLowerCase() == 'split' && curStep == 1144 && camZooming || curSong.toLowerCase() == 'split' && curStep == 1147 && camZooming || curSong.toLowerCase() == 'split' && curStep == 1150 && camZooming)
 			{
 		
 				FlxG.camera.zoom += 0.05;
 				camHUD.zoom += 0.01;
 			}
-		}*/
+		}
 
 
 		// yes this updates every step.
