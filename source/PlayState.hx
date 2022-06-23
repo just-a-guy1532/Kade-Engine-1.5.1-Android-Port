@@ -1132,7 +1132,61 @@ class PlayState extends MusicBeatState
 		if (!loadRep)
 			rep = new Replay("na");
 
+		if (curStage == 'night' || curStage == 'sans') {
+			phillyCityLights = new FlxTypedGroup<FlxSprite>();
+			add(phillyCityLights);
+
+			coolGlowyLights = new FlxTypedGroup<FlxSprite>();
+			add(coolGlowyLights);
+			coolGlowyLightsMirror = new FlxTypedGroup<FlxSprite>();
+			add(coolGlowyLightsMirror);
+			for (i in 0...4)
+			{
+				var light:FlxSprite = new FlxSprite().loadGraphic(Paths.image('night/light' + i, 'shared'));
+				light.scrollFactor.set(0, 0);
+				light.cameras = [camHUD];
+				light.visible = false;
+				light.updateHitbox();
+				light.antialiasing = true;
+				phillyCityLights.add(light);
+
+				var glow:FlxSprite = new FlxSprite().loadGraphic(Paths.image('night/Glow' + i, 'shared'));
+				glow.scrollFactor.set(0, 0);
+				glow.cameras = [camHUD];
+				glow.visible = false;
+				glow.updateHitbox();
+				glow.antialiasing = true;
+				coolGlowyLights.add(glow);
+
+				var glow2:FlxSprite = new FlxSprite().loadGraphic(Paths.image('night/Glow' + i, 'shared'));
+				glow2.scrollFactor.set(0, 0);
+				glow2.cameras = [camHUD];
+				glow2.visible = false;
+				glow2.updateHitbox();
+				glow2.antialiasing = true;
+				coolGlowyLightsMirror.add(glow2);
+			}
+		}
 		super.create();
+		areYouReady = new FlxTypedGroup<FlxSprite>();
+		add(areYouReady);
+		for (i in 0...3) {
+			var shit:FlxSprite = new FlxSprite();
+			switch (i) {
+				case 0:
+					shit = new FlxSprite().loadGraphic(Paths.image('ARE', 'shared'));
+				case 1:
+					shit = new FlxSprite().loadGraphic(Paths.image('YOU', 'shared'));
+				case 2:
+					shit = new FlxSprite().loadGraphic(Paths.image('READY', 'shared'));
+			}
+			shit.cameras = [camHUD];
+			shit.visible = false;
+			areYouReady.add(shit);
+		} 
+
+		trace(dad.x);
+		trace(dad.y);
 	}
 
 	function schoolIntro(?dialogueBox:DialogueBox):Void
