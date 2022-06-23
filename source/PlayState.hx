@@ -3568,7 +3568,7 @@ class PlayState extends MusicBeatState
 			camHUD.zoom += 0.03;
 		}
 		
-			if (splitCamMode) {
+			/*if (splitCamMode) {
 				defaultCamZoom = 0.65;
 				if (splitExtraZoom)
 					defaultCamZoom = 0.75;
@@ -3713,7 +3713,7 @@ class PlayState extends MusicBeatState
 						spr.color = FlxColor.fromHSL(spr.color.hue, spr.color.saturation, 1, 1);
 					}
 				}
-			}
+			}*/
 
 		if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0)
 		{
