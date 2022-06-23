@@ -2395,7 +2395,9 @@ class PlayState extends MusicBeatState
 								altAnim = '-alt';
 						}
 						switch (daNote.noteType) {
-if (SONG.song.toLowerCase() == 'split' && storyDifficulty == 3 && !FlxG.save.data.lowDetail){
+						}
+							case 'drop':
+								if (SONG.song.toLowerCase() == 'split' && storyDifficulty == 3 && !FlxG.save.data.lowDetail){
 									var ded:FlxSprite = new FlxSprite(dad.x, dad.y);
 									dad.alpha = 0;
 								//	camHUD.visible = false;
@@ -2406,7 +2408,6 @@ if (SONG.song.toLowerCase() == 'split' && storyDifficulty == 3 && !FlxG.save.dat
 									ded.x -= 100;
 									add(ded);
 									}	
-							case 'are':
 	
 						switch (Math.abs(daNote.noteData))
 						{
