@@ -160,8 +160,6 @@ class PlayState extends MusicBeatState
 	var isHalloween:Bool = false;
 
 	var phillyCityLights:FlxTypedGroup<FlxSprite>;
-	var coolGlowyLights:FlxTypedGroup<FlxSprite>;
-	var coolGlowyLightsMirror:FlxTypedGroup<FlxSprite>;
 	var phillyTrain:FlxSprite;
 	var trainSound:FlxSound;
 
@@ -219,7 +217,7 @@ class PlayState extends MusicBeatState
 	
 	public function addObject(object:FlxBasic) { add(object); }
 	public function removeObject(object:FlxBasic) { remove(object); }
-
+	
 	var pc:Character;
 
 	var areYouReady:FlxTypedGroup<FlxSprite>;
@@ -844,8 +842,6 @@ class PlayState extends MusicBeatState
 			case 'pico':
 				camPos.x += 600;
 				dad.y += 300;
-			case 'pc':
-				dad.y += 350;
 			case 'parents-christmas':
 				dad.x -= 500;
 			case 'senpai':
@@ -883,11 +879,6 @@ class PlayState extends MusicBeatState
 			case 'mallEvil':
 				boyfriend.x += 320;
 				dad.y -= 80;
-			case 'school':
-				boyfriend.x += 200;
-				boyfriend.y += 220;
-				gf.x += 180;
-				gf.y += 300;
 			case 'night':
 				dad.x -= 370;
 				dad.y + 39;
@@ -895,6 +886,11 @@ class PlayState extends MusicBeatState
 				boyfriend.y -= 20;
 				gf.x += 300;
 				gf.y -= 50;
+			case 'school':
+				boyfriend.x += 200;
+				boyfriend.y += 220;
+				gf.x += 180;
+				gf.y += 300;
 			case 'schoolEvil':
 				if(FlxG.save.data.distractions){
 				// trailArea.scrollFactor.set();
@@ -1136,7 +1132,7 @@ class PlayState extends MusicBeatState
 		if (!loadRep)
 			rep = new Replay("na");
 
-		/*if (curStage == 'night') {
+		if (curStage == 'night') {
 			phillyCityLights = new FlxTypedGroup<FlxSprite>();
 			add(phillyCityLights);
 
@@ -1170,9 +1166,9 @@ class PlayState extends MusicBeatState
 				glow2.antialiasing = true;
 				coolGlowyLightsMirror.add(glow2);
 			}
-		}*/
+		}
 		super.create();
-		/*areYouReady = new FlxTypedGroup<FlxSprite>();
+		areYouReady = new FlxTypedGroup<FlxSprite>();
 		add(areYouReady);
 		for (i in 0...3) {
 			var shit:FlxSprite = new FlxSprite();
@@ -1190,7 +1186,7 @@ class PlayState extends MusicBeatState
 		} 
 
 		trace(dad.x);
-		trace(dad.y);*/
+		trace(dad.y);
 	}
 
 	function schoolIntro(?dialogueBox:DialogueBox):Void
@@ -1424,7 +1420,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.sound.music.onComplete = endSong;
 		vocals.play();
-		secondaryVocals.play();
+		
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
@@ -2648,9 +2644,6 @@ class PlayState extends MusicBeatState
 
 					if (storyDifficulty == 2)
 						difficulty = '-hard';
-						
-					if (storyDifficulty == 3)
-						difficulty = '-ex';
 
 					trace('LOADING NEXT SONG');
 					trace(PlayState.storyPlaylist[0].toLowerCase() + difficulty);
@@ -2693,7 +2686,6 @@ class PlayState extends MusicBeatState
 	var timeShown = 0;
 	var currentTimingShown:FlxText = null;
 
-		}
 	private function popUpScore(daNote:Note):Void
 		{
 			var noteDiff:Float = Math.abs(Conductor.songPosition - daNote.strumTime);
@@ -3505,7 +3497,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-
 		// yes this updates every step.
 		// yes this is bad
 		// but i'm doing it to update misses and accuracy
@@ -3567,153 +3558,6 @@ class PlayState extends MusicBeatState
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.03;
 		}
-		
-			/*if (splitCamMode) {
-				defaultCamZoom = 0.65;
-				if (splitExtraZoom)
-					defaultCamZoom = 0.75;
-			}
-
-			if (FlxG.save.data.flashing && splitMode) {
-				for (spr in theEntireFuckingStage) {
-					spr.color = FlxColor.fromHSL(spr.color.hue, spr.color.saturation, 0.7, 1);
-				}
-
-				phillyCityLights.forEach(function(light:FlxSprite)
-				{
-					light.visible = false;
-				});
-
-				coolGlowyLights.forEach(function(light:FlxSprite)
-				{
-					light.visible = false;
-				});
-
-				coolGlowyLightsMirror.forEach(function(light:FlxSprite)
-				{
-					light.visible = false;
-				});
-
-				curLight++;
-				if (curLight > phillyCityLights.length - 1)
-					curLight = 0;
-
-				phillyCityLights.members[curLight].visible = true;
-				phillyCityLights.members[curLight].alpha = 1;
-
-				coolGlowyLights.members[curLight].visible = true;
-				coolGlowyLights.members[curLight].alpha = 0.8;
-
-				FlxTween.tween(phillyCityLights.members[curLight], {alpha: 0}, 0.3, {
-				});
-				FlxTween.tween(coolGlowyLights.members[curLight], {alpha: 0}, 0.3, {
-				});
-				if (!splitCamMode)
-					defaultCamZoom = 0.9;
-				else {
-					coolGlowyLightsMirror.members[curLight].visible = true;
-					coolGlowyLightsMirror.members[curLight].alpha = 0.8;
-					FlxTween.tween(coolGlowyLightsMirror.members[curLight], {alpha: 0}, 0.3, {
-					});
-				}
-				FlxG.camera.zoom += 0.030;
-				camHUD.zoom += 0.04;
-			} else if (!splitSoftMode && SONG.song.toLowerCase() == 'split' && storyDifficulty == 3) {
-				if (theEntireFuckingStage.members[0].color.lightness < 1) {
-					for (spr in theEntireFuckingStage) {
-						spr.color = FlxColor.fromHSL(spr.color.hue, spr.color.saturation, 1, 1);
-					}
-					defaultCamZoom = 0.75;
-				}
-			}
-			
-			if (FlxG.save.data.flashing && splitSoftMode) {
-				for (spr in theEntireFuckingStage) {
-					spr.color = FlxColor.fromHSL(spr.color.hue, spr.color.saturation, 0.8, 1);
-				}
-				if (curBeat % 2 == 0) {
-					phillyCityLights.forEach(function(light:FlxSprite)
-					{
-						light.visible = false;
-					});
-
-					curLight++;
-					if (curLight > phillyCityLights.length - 1)
-						curLight = 0;
-
-					phillyCityLights.members[curLight].visible = true;
-					phillyCityLights.members[curLight].alpha = 0.8;
-
-					FlxTween.tween(phillyCityLights.members[curLight], {alpha: 0}, 0.3, {
-					});
-				}
-				defaultCamZoom = 0.75;
-				FlxG.camera.zoom += 0.030;
-				camHUD.zoom += 0.04;
-			} else if (!splitMode && SONG.song.toLowerCase() == 'split' && storyDifficulty == 3) {
-				if (theEntireFuckingStage.members[0].color.lightness < 1) {
-					for (spr in theEntireFuckingStage) {
-						spr.color = FlxColor.fromHSL(spr.color.hue, spr.color.saturation, 1, 1);
-					}
-				}
-			else if (storyDifficulty != 3) {
-				if (curSong.toLowerCase() == 'split' && curBeat == 188) //|| curSong.toLowerCase() == 'split' && curBeat == 190)
-				{
-					if (FlxG.save.data.flashing) {
-						phillyCityLights.forEach(function(light:FlxSprite)
-						{
-							light.visible = false;
-						});
-
-						curLight++;
-						if (curLight > phillyCityLights.length - 1)
-							curLight = 0;
-
-						phillyCityLights.members[curLight].visible = true;
-						phillyCityLights.members[curLight].alpha = 1;
-						FlxTween.tween(phillyCityLights.members[curLight], {alpha: 0}, 0.2, {
-						});
-						for (spr in theEntireFuckingStage) {
-							spr.color = FlxColor.fromHSL(spr.color.hue, spr.color.saturation, 0.9, 1);
-						}
-					}
-				}
-				else if (curSong.toLowerCase() == 'split' && curBeat >= 192 && curBeat < 256 && camZooming && FlxG.camera.zoom < 1.35)
-				{
-					if (FlxG.save.data.flashing) {
-						for (spr in theEntireFuckingStage) {
-							spr.color = FlxColor.fromHSL(spr.color.hue, spr.color.saturation, 0.7, 1);
-						}
-						phillyCityLights.forEach(function(light:FlxSprite)
-						{
-							light.visible = false;
-						});
-
-						curLight++;
-						if (curLight > phillyCityLights.length - 1)
-							curLight = 0;
-
-						phillyCityLights.members[curLight].visible = true;
-						phillyCityLights.members[curLight].alpha = 1;
-						FlxTween.tween(phillyCityLights.members[curLight], {alpha: 0}, 0.3, {
-						});
-				
-						FlxG.camera.zoom += 0.030;
-						camHUD.zoom += 0.04;
-					}
-				}
-				else if (curSong.toLowerCase() == 'split' && curBeat >= 32 && curBeat < 160 && camZooming && FlxG.camera.zoom < 1.35 && curBeat != 95 || curSong.toLowerCase() == 'split' && curBeat >= 288 && curBeat < 316 && camZooming && FlxG.camera.zoom < 1.35 || curSong.toLowerCase() == 'split' && curBeat >= 352 && curBeat < 385 && camZooming && FlxG.camera.zoom < 1.35)
-				{
-					FlxG.camera.zoom += 0.015;
-					camHUD.zoom += 0.03;
-				}
-				else if (curSong.toLowerCase() == 'split' && curBeat == 256)
-				{
-					for (spr in theEntireFuckingStage) {
-						spr.color = FlxColor.fromHSL(spr.color.hue, spr.color.saturation, 1, 1);
-					}
-				}
-			}*/
 
 		if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0)
 		{
