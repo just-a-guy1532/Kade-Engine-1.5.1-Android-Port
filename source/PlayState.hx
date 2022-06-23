@@ -2394,22 +2394,6 @@ class PlayState extends MusicBeatState
 							if (SONG.notes[Math.floor(curStep / 16)].altAnim)
 								altAnim = '-alt';
 						}
-						switch (daNote.noteType) {
-						}
-						}
-						}
-							case 'drop':
-								if (SONG.song.toLowerCase() == 'split' && storyDifficulty == 3 && !FlxG.save.data.lowDetail){
-									var ded:FlxSprite = new FlxSprite(dad.x, dad.y);
-									dad.alpha = 0;
-								//	camHUD.visible = false;
-									ded.frames = Paths.getSparrowAtlas('night/amor_falling_lol', 'shared');
-									ded.animation.addByPrefix('idle', 'amor_falling_lol instance 1', 24, false);
-									ded.animation.play('idle');
-									ded.y -= 100;
-									ded.x -= 100;
-									add(ded);
-									}	
 	
 						switch (Math.abs(daNote.noteData))
 						{
