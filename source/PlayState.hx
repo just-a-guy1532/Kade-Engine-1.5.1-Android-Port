@@ -170,8 +170,6 @@ class PlayState extends MusicBeatState
 	var upperBoppers:FlxSprite;
 	var bottomBoppers:FlxSprite;
 	var santa:FlxSprite;
-	
-	var mini:FlxSprite;
 
 	var fc:Bool = true;
 
@@ -217,18 +215,7 @@ class PlayState extends MusicBeatState
 	
 	public function addObject(object:FlxBasic) { add(object); }
 	public function removeObject(object:FlxBasic) { remove(object); }
-	
-	var pc:Character;
 
-	var areYouReady:FlxTypedGroup<FlxSprite>;
-
-	var theEntireFuckingStage:FlxTypedGroup<FlxSprite>;
-	
-	var splitMode:Bool = false;
-	var splitSoftMode:Bool = false;
-	var splitCamMode:Bool = false;
-	var splitExtraZoom:Bool = false;
-	var coolerText:Bool = false;
 
 	override public function create()
 	{
@@ -842,10 +829,10 @@ class PlayState extends MusicBeatState
 			case 'pico':
 				camPos.x += 600;
 				dad.y += 300;
-			case 'parents-christmas':
-				dad.x -= 500;
 			case 'pc':
 				dad.y += 350;
+			case 'parents-christmas':
+				dad.x -= 500;
 			case 'senpai':
 				dad.x += 150;
 				dad.y += 360;
@@ -881,6 +868,11 @@ class PlayState extends MusicBeatState
 			case 'mallEvil':
 				boyfriend.x += 320;
 				dad.y -= 80;
+			case 'school':
+				boyfriend.x += 200;
+				boyfriend.y += 220;
+				gf.x += 180;
+				gf.y += 300;
 			case 'night':
 				dad.x -= 370;
 				dad.y + 39;
@@ -888,11 +880,6 @@ class PlayState extends MusicBeatState
 				boyfriend.y -= 20;
 				gf.x += 300;
 				gf.y -= 50;
-			case 'school':
-				boyfriend.x += 200;
-				boyfriend.y += 220;
-				gf.x += 180;
-				gf.y += 300;
 			case 'schoolEvil':
 				if(FlxG.save.data.distractions){
 				// trailArea.scrollFactor.set();
@@ -1134,61 +1121,7 @@ class PlayState extends MusicBeatState
 		if (!loadRep)
 			rep = new Replay("na");
 
-		if (curStage == 'night') {
-			phillyCityLights = new FlxTypedGroup<FlxSprite>();
-			add(phillyCityLights);
-
-			coolGlowyLights = new FlxTypedGroup<FlxSprite>();
-			add(coolGlowyLights);
-			coolGlowyLightsMirror = new FlxTypedGroup<FlxSprite>();
-			add(coolGlowyLightsMirror);
-			for (i in 0...4)
-			{
-				var light:FlxSprite = new FlxSprite().loadGraphic(Paths.image('night/light' + i, 'shared'));
-				light.scrollFactor.set(0, 0);
-				light.cameras = [camHUD];
-				light.visible = false;
-				light.updateHitbox();
-				light.antialiasing = true;
-				phillyCityLights.add(light);
-
-				var glow:FlxSprite = new FlxSprite().loadGraphic(Paths.image('night/Glow' + i, 'shared'));
-				glow.scrollFactor.set(0, 0);
-				glow.cameras = [camHUD];
-				glow.visible = false;
-				glow.updateHitbox();
-				glow.antialiasing = true;
-				coolGlowyLights.add(glow);
-
-				var glow2:FlxSprite = new FlxSprite().loadGraphic(Paths.image('night/Glow' + i, 'shared'));
-				glow2.scrollFactor.set(0, 0);
-				glow2.cameras = [camHUD];
-				glow2.visible = false;
-				glow2.updateHitbox();
-				glow2.antialiasing = true;
-				coolGlowyLightsMirror.add(glow2);
-			}
-		}
 		super.create();
-		areYouReady = new FlxTypedGroup<FlxSprite>();
-		add(areYouReady);
-		for (i in 0...3) {
-			var shit:FlxSprite = new FlxSprite();
-			switch (i) {
-				case 0:
-					shit = new FlxSprite().loadGraphic(Paths.image('ARE', 'shared'));
-				case 1:
-					shit = new FlxSprite().loadGraphic(Paths.image('YOU', 'shared'));
-				case 2:
-					shit = new FlxSprite().loadGraphic(Paths.image('READY', 'shared'));
-			}
-			shit.cameras = [camHUD];
-			shit.visible = false;
-			areYouReady.add(shit);
-		} 
-
-		trace(dad.x);
-		trace(dad.y);
 	}
 
 	function schoolIntro(?dialogueBox:DialogueBox):Void
@@ -2198,16 +2131,6 @@ class PlayState extends MusicBeatState
 						camFollow.y = dad.getMidpoint().y - 430;
 						camFollow.x = dad.getMidpoint().x - 100;
 				}
-				switch (curStage)
-				{
-					case 'night':
-						if (splitCamMode) {
-							camFollow.x = 600.92;
-							camFollow.y = 447.52;
-						} else {
-							camFollow.x = FlxMath.lerp(295.92, camFollow.x, 0.1);
-							camFollow.y = FlxMath.lerp(447.52, camFollow.y, 0.1);
-						}
 
 				if (dad.curCharacter == 'mom')
 					vocals.volume = 1;
@@ -2241,20 +2164,10 @@ class PlayState extends MusicBeatState
 					case 'schoolEvil':
 						camFollow.x = boyfriend.getMidpoint().x - 200;
 						camFollow.y = boyfriend.getMidpoint().y - 200;
-					case 'night':
-						if (splitCamMode) {
-							camFollow.x = 600.92;
-							camFollow.y = 447.52;
-						} else {
-							camFollow.x = FlxMath.lerp(790.36, camFollow.x, 0.1);
-							camFollow.y = FlxMath.lerp(480.91, camFollow.y, 0.1);
-						}
 				}
 			}
 		}
 
-		if (storyDifficulty == 3 && SONG.song.toLowerCase() == 'split')
-			camZooming = true;
 		if (camZooming)
 		{
 			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, 0.95);
@@ -2590,9 +2503,7 @@ class PlayState extends MusicBeatState
 			Highscore.saveScore(SONG.song, Math.round(songScore), storyDifficulty);
 			#end
 		}
-		if (SONG.song.toLowerCase() == 'split' && storyDifficulty == 3) {
-			FlxG.save.data.beatSplitEX2 = true;
-		}
+
 		if (offsetTesting)
 		{
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
@@ -2646,6 +2557,9 @@ class PlayState extends MusicBeatState
 
 					if (storyDifficulty == 2)
 						difficulty = '-hard';
+						
+					if (storyDifficulty == 3)
+						difficulty = '-ex';
 
 					trace('LOADING NEXT SONG');
 					trace(PlayState.storyPlaylist[0].toLowerCase() + difficulty);
@@ -2688,7 +2602,6 @@ class PlayState extends MusicBeatState
 	var timeShown = 0;
 	var currentTimingShown:FlxText = null;
 
-		}
 	private function popUpScore(daNote:Note):Void
 		{
 			var noteDiff:Float = Math.abs(Conductor.songPosition - daNote.strumTime);
@@ -3491,14 +3404,7 @@ class PlayState extends MusicBeatState
 			luaModchart.executeState('stepHit',[curStep]);
 		}
 
-		if (storyDifficulty != 3 && !FlxG.save.data.lowDetail) {
-			if (curSong.toLowerCase() == 'split' && curStep == 124 && camZooming || curSong.toLowerCase() == 'split' && curStep == 126 && camZooming || curSong.toLowerCase() == 'split' && curStep == 1144 && camZooming || curSong.toLowerCase() == 'split' && curStep == 1147 && camZooming || curSong.toLowerCase() == 'split' && curStep == 1150 && camZooming)
-			{
-		
-				FlxG.camera.zoom += 0.05;
-				camHUD.zoom += 0.01;
-			}
-		}
+
 
 		// yes this updates every step.
 		// yes this is bad
