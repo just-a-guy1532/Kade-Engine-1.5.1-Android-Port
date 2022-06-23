@@ -277,6 +277,8 @@ class PlayState extends MusicBeatState
 				storyDifficultyText = "Normal";
 			case 2:
 				storyDifficultyText = "Hard";
+			case 3:
+				storyDifficultyText = "EX";
 		}
 
 		iconRPC = SONG.player2;
@@ -1363,6 +1365,9 @@ class PlayState extends MusicBeatState
 
 		if (!paused)
 		{
+			if (storyDifficulty == 3)
+				FlxG.sound.playMusic(Paths.instEX(PlayState.SONG.song), 1, false);
+			else
 			FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 		}
 
