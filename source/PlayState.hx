@@ -2397,6 +2397,7 @@ class PlayState extends MusicBeatState
 						switch (daNote.noteType) {
 						}
 						}
+						}
 							case 'drop':
 								if (SONG.song.toLowerCase() == 'split' && storyDifficulty == 3 && !FlxG.save.data.lowDetail){
 									var ded:FlxSprite = new FlxSprite(dad.x, dad.y);
