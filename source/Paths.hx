@@ -116,6 +116,26 @@ class Paths
 		return 'songs:assets/songs/${songLowercase}/VoicesEX.$SOUND_EXT';
 	}
 
+	inline static public function voicesEXMenu(song:String, char:String)
+	{
+		var songLowercase = StringTools.replace(song, " ", "-").toLowerCase();
+			switch (songLowercase) {
+				case 'dad-battle': songLowercase = 'dadbattle';
+				case 'philly-nice': songLowercase = 'philly';
+			}
+		return 'songs:assets/songs/${songLowercase}/menuEX/' + char + '.$SOUND_EXT';
+	}
+
+	inline static public function voicesEXcharacter(song:String, char:String)
+	{
+		var songLowercase = StringTools.replace(song, " ", "-").toLowerCase();
+			switch (songLowercase) {
+				case 'dad-battle': songLowercase = 'dadbattle';
+				case 'philly-nice': songLowercase = 'philly';
+			}
+		return 'songs:assets/songs/${songLowercase}/VoicesEX' + char + '.$SOUND_EXT';
+	}
+
 	inline static public function inst(song:String)
 	{
 		song = StringTools.replace(song," ", "-");
