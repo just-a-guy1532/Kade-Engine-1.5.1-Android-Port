@@ -1136,7 +1136,7 @@ class PlayState extends MusicBeatState
 		if (!loadRep)
 			rep = new Replay("na");
 
-		if (curStage == 'night' || curStage == 'sans') {
+		if (curStage == 'night') {
 			phillyCityLights = new FlxTypedGroup<FlxSprite>();
 			add(phillyCityLights);
 
@@ -2202,7 +2202,7 @@ class PlayState extends MusicBeatState
 				}
 				switch (curStage)
 				{
-					case 'night' | 'sans':
+					case 'night':
 						if (splitCamMode) {
 							camFollow.x = 600.92;
 							camFollow.y = 447.52;
@@ -2243,7 +2243,7 @@ class PlayState extends MusicBeatState
 					case 'schoolEvil':
 						camFollow.x = boyfriend.getMidpoint().x - 200;
 						camFollow.y = boyfriend.getMidpoint().y - 200;
-					case 'night' | 'sans':
+					case 'night':
 						if (splitCamMode) {
 							camFollow.x = 600.92;
 							camFollow.y = 447.52;
@@ -3496,14 +3496,14 @@ class PlayState extends MusicBeatState
 			luaModchart.executeState('stepHit',[curStep]);
 		}
 
-		if (storyDifficulty != 3 && !FlxG.save.data.lowDetail) {
+		/*if (storyDifficulty != 3 && !FlxG.save.data.lowDetail) {
 			if (curSong.toLowerCase() == 'split' && curStep == 124 && camZooming || curSong.toLowerCase() == 'split' && curStep == 126 && camZooming || curSong.toLowerCase() == 'split' && curStep == 1144 && camZooming || curSong.toLowerCase() == 'split' && curStep == 1147 && camZooming || curSong.toLowerCase() == 'split' && curStep == 1150 && camZooming)
 			{
 		
 				FlxG.camera.zoom += 0.05;
 				camHUD.zoom += 0.01;
 			}
-		}
+		}*/
 
 
 		// yes this updates every step.
