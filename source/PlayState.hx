@@ -170,6 +170,8 @@ class PlayState extends MusicBeatState
 	var upperBoppers:FlxSprite;
 	var bottomBoppers:FlxSprite;
 	var santa:FlxSprite;
+	
+	var mini:FlxSprite;
 
 	var fc:Bool = true;
 
@@ -216,6 +218,17 @@ class PlayState extends MusicBeatState
 	public function addObject(object:FlxBasic) { add(object); }
 	public function removeObject(object:FlxBasic) { remove(object); }
 
+	var pc:Character;
+
+	var areYouReady:FlxTypedGroup<FlxSprite>;
+
+	var theEntireFuckingStage:FlxTypedGroup<FlxSprite>;
+
+	var splitMode:Bool = false;
+	var splitSoftMode:Bool = false;
+	var splitCamMode:Bool = false;
+	var splitExtraZoom:Bool = false;
+	var coolerText:Bool = false;
 
 	override public function create()
 	{
@@ -2164,6 +2177,14 @@ class PlayState extends MusicBeatState
 					case 'schoolEvil':
 						camFollow.x = boyfriend.getMidpoint().x - 200;
 						camFollow.y = boyfriend.getMidpoint().y - 200;
+					case 'night':
+						if (splitCamMode) {
+							camFollow.x = 600.92;
+							camFollow.y = 447.52;
+						} else {
+							camFollow.x = FlxMath.lerp(790.36, camFollow.x, 0.1);
+							camFollow.y = FlxMath.lerp(480.91, camFollow.y, 0.1);
+						}
 				}
 			}
 		}
