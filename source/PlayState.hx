@@ -160,6 +160,8 @@ class PlayState extends MusicBeatState
 	var isHalloween:Bool = false;
 
 	var phillyCityLights:FlxTypedGroup<FlxSprite>;
+	var coolGlowyLights:FlxTypedGroup<FlxSprite>;
+	var coolGlowyLightsMirror:FlxTypedGroup<FlxSprite>;
 	var phillyTrain:FlxSprite;
 	var trainSound:FlxSound;
 
@@ -170,6 +172,8 @@ class PlayState extends MusicBeatState
 	var upperBoppers:FlxSprite;
 	var bottomBoppers:FlxSprite;
 	var santa:FlxSprite;
+	
+	var mini:FlxSprite;
 
 	var fc:Bool = true;
 
@@ -2589,7 +2593,6 @@ class PlayState extends MusicBeatState
 			#end
 		}
 		if (SONG.song.toLowerCase() == 'split' && storyDifficulty == 3) {
-			MainMenuState.firsttimeSplitEX = true;
 			FlxG.save.data.beatSplitEX2 = true;
 		}
 		if (offsetTesting)
